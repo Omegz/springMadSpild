@@ -1,37 +1,180 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="da">
 <head>
-    <title>Home</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Stop Madspild – Enkel landingsside</title>
     <style>
-        .navbar { background-color: #333; overflow: hidden; }
-        .navbar a {
-            float: left;
-            color: white;
-            text-align: center;
-            padding: 14px 16px;
-            text-decoration: none;
-        }
-        .navbar a:hover { background-color: #ddd; color: black; }
-        .navbar a.active { background-color: #4CAF50; }
-        .button {
-            display: inline-block;
-            padding: 10px 20px;
-            background-color: #4CAF50;
-            color: white;
-            text-decoration: none;
-            border-radius: 5px;
-            margin-top: 20px;
-        }
-        .button:hover {
-            background-color: #45a049;
+        /* Minimal, konsekvent styling (Golden rule: consistency) */
+        :root { --bg:#ffffff; --fg:#222; --muted:#555; --accent:#3B7A57; --accent-2:#2f5f45; --card:#f6f7f8; }
+        * { box-sizing: border-box; }
+        body { margin: 0; font: 16px/1.5 system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; color: var(--fg); background: var(--bg); }
+        a { color: inherit; text-decoration: none; }
+        img { max-width: 100%; height: auto; display: block; border-radius: 8px; }
+
+        .container { max-width: 1040px; margin: 0 auto; padding: 0 16px; }
+        .navbar { position: sticky; top: 0; background: #fff; border-bottom: 1px solid #eee; }
+        .nav-inner { display: flex; align-items: center; justify-content: space-between; padding: 10px 0; }
+        .brand { font-weight: 700; letter-spacing: .2px; }
+        .nav-links { display: flex; gap: 14px; }
+        .nav-links a { padding: 8px 10px; border-radius: 8px; }
+        .nav-links a:hover { background: #f2f2f2; }
+
+        .hero { display: grid; gap: 20px; align-items: center; padding: 36px 0; }
+        .badge { display: inline-block; font-size: 12px; background: #eaf4ee; color: var(--accent); padding: 6px 10px; border-radius: 999px; }
+        h1 { font-size: clamp(28px, 4vw, 46px); line-height: 1.15; margin: 10px 0 8px; }
+        .lead { color: var(--muted); max-width: 60ch; }
+
+        .actions { display: flex; gap: 10px; margin-top: 14px; }
+        .btn { display: inline-block; padding: 10px 14px; border-radius: 10px; border: 1px solid #ddd; }
+        .btn.primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+        .btn.primary:hover { background: var(--accent-2); }
+        .btn.ghost:hover { background: #f5f5f5; }
+
+        /* Kort gitter (Gestalt: lighed + nærhed) */
+        .features { background: var(--card); padding: 26px 0; }
+        .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+        .card { background: #fff; border: 1px solid #eee; border-radius: 12px; padding: 14px; }
+        .card h3 { margin: 10px 0 6px; font-size: 18px; }
+        .card p { color: var(--muted); margin: 0; }
+
+        /* Enkel “fakta”-stribe (Gestalt: kontrast & nærhed) */
+        .stats { padding: 24px 0; }
+        .stats-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+        .stat { background: #fff; border: 1px solid #eee; border-radius: 12px; padding: 14px; text-align: center; }
+        .stat strong { display: block; font-size: 22px; }
+
+        /* CTA-blok (Golden rule: tydelig primær handling) */
+        .cta { background: #0b0b0b; color: #fff; border-radius: 16px; padding: 22px; display: grid; gap: 10px; align-items: center; }
+        .cta .row { display: flex; gap: 10px; flex-wrap: wrap; }
+
+        footer { border-top: 1px solid #eee; margin-top: 28px; }
+        .foot { padding: 14px 0; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px; color: var(--muted); font-size: 14px; }
+
+        /* Simpel responsivitet */
+        @media (max-width: 800px) {
+            .grid, .stats-row { grid-template-columns: 1fr; }
+            .hero { grid-template-columns: 1fr; }
         }
     </style>
 </head>
 <body>
-<h1>Welcome to Spring Mad Spild</h1>
-<p>This is the home page of our application.</p>
-<a href="/about" class="button">Go to About Page</a>
+
+<!-- Navigation: konsekvens + genkendelighed -->
+<header class="navbar" aria-label="Hovednavigation">
+    <div class="container nav-inner">
+        <a class="brand" href="/">Stop Madspild</a>
+        <nav class="nav-links" aria-label="Primære links">
+            <a href="/">Forside</a>
+            <a href="/about">Om os</a>
+        </nav>
+    </div>
+</header>
+
+<main>
+    <!-- Hero: hierarki + tydelig primær handling -->
+    <section class="hero container">
+        <div>
+            <span class="badge">Sammen mod madspild</span>
+            <h1>Brug mere – spild mindre.</h1>
+            <p class="lead">
+                Hver dag smides god mad ud. Vi hjælper husholdninger, skoler og
+                virksomheder med enkle vaner, der gør en stor forskel for både klimaet
+                og økonomien.
+            </p>
+            <div class="actions" role="group" aria-label="Primære handlinger">
+                <a class="btn primary" href="/about">Lær mere – Om os</a>
+            </div>
+        </div>
+        <div>
+            <!-- Illustrativt billede (skift gerne URL) -->
+            <img
+                    src="https://images.unsplash.com/photo-1515003197210-e0cd71810b5f?q=80&w=1200&auto=format&fit=crop"
+                    alt="Grøntsager og glas med rester – inspiration til at bruge maden"
+                    loading="lazy"
+                    width="1200" height="800"
+            />
+        </div>
+    </section>
+
+    <!-- 3 enkle kort: Gestalt lighed + nærhed -->
+    <section class="features">
+        <div class="container">
+            <div class="grid">
+                <article class="card">
+                    <img
+                            src="https://images.unsplash.com/photo-1542831371-29b0f74f9713?q=80&w=800&auto=format&fit=crop"
+                            alt="Indkøbsliste på køkkenbordet"
+                            loading="lazy"
+                            width="800" height="600"
+                    />
+                    <h3>Planlæg indkøbene</h3>
+                    <p>Lav en kort liste – køb mindre, men bedre. Spar penge og undgå impulskøb.</p>
+                </article>
+                <article class="card">
+                    <img
+                            src="https://images.unsplash.com/photo-1505575972945-280c5a4bc58b?q=80&w=800&auto=format&fit=crop"
+                            alt="Mad i genbrugelige beholdere"
+                            loading="lazy"
+                            width="800" height="600"
+                    />
+                    <h3>Gem resterne</h3>
+                    <p>Opbevar rigtigt og mærk beholdere – så bliver rester til nye måltider.</p>
+                </article>
+                <article class="card">
+                    <img
+                            src="https://images.unsplash.com/photo-1490818387583-1baba5e638af?q=80&w=800&auto=format&fit=crop"
+                            alt="Gulerodsskræller og grøntsager klar til suppe"
+                            loading="lazy"
+                            width="800" height="600"
+                    />
+                    <h3>Brug hele råvaren</h3>
+                    <p>Kog fond på skræller, steg stilke, og tryl “skæve” grøntsager om til lækkerier.</p>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- Fakta/forstærkning: kontrast + enkelhed -->
+    <section class="stats container" aria-label="Nøgletal">
+        <div class="stats-row">
+            <div class="stat" aria-label="Husholdning kan spare">
+                <strong>3.000+ kr/år</strong>
+                Mindre madspild i en typisk familie.
+            </div>
+            <div class="stat" aria-label="CO₂-besparelse">
+                <strong>~100 kg CO₂</strong>
+                Potentiel årlig besparelse pr. husstand.
+            </div>
+            <div class="stat" aria-label="Opskrifter">
+                <strong>50+ opskrifter</strong>
+                Rester, der bliver til favoritter.
+            </div>
+        </div>
+    </section>
+
+    <!-- Enkel CTA: tydelig næste skridt -->
+    <section class="container" aria-label="Tilmelding og kontakt">
+        <div class="cta">
+            <h2 style="margin:0;">Klar til at reducere madspild i dag?</h2>
+            <p style="margin:0;">Få et gratis startkit med planer, opskrifter og opbevaringstips.</p>
+            <div class="row">
+                <a class="btn primary" href="/about">Kom i gang</a>
+            </div>
+        </div>
+    </section>
+</main>
+
+<footer>
+    <div class="container foot">
+        <span>© <span id="y"></span> Stop Madspild</span>
+        <nav aria-label="Footer links">
+            <a href="/about">Om os</a>
+        </nav>
+    </div>
+</footer>
+
+<!-- Lille forbedring: dynamisk årstal (non-essential) -->
+<script>document.getElementById('y').textContent = new Date().getFullYear();</script>
 </body>
 </html>
-
-// hellows
