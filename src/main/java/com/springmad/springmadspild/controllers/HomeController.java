@@ -20,4 +20,9 @@ public class HomeController {
     public String kontakt() {
         return "kontakt";
     }
+
+    @GetMapping("/login")
+    public String login() {
+        return "login";
+    }
 }
